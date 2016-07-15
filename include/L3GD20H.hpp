@@ -6,86 +6,89 @@
 
 #pragma once
 
-#include <Configuration.hpp>
+#include <ModuleConfiguration.hpp>
 
-#include <Core/HW/SPI.hpp>
-#include <Core/HW/EXT.hpp>
-#include <Core/MW/CoreSensor.hpp>
-#include <Core/MW/Thread.hpp>
+#include <core/hw/SPI.hpp>
+#include <core/hw/EXT.hpp>
+#include <core/mw/CoreSensor.hpp>
+#include <core/os/Thread.hpp>
 
 namespace sensors {
-   class L3GD20H
-   {
+class L3GD20H
+{
 public:
-      L3GD20H(
-         Core::HW::SPIDevice&  spi,
-         Core::HW::EXTChannel& ext
-      );
+   L3GD20H(
+      core::hw::SPIDevice&  spi,
+      core::hw::EXTChannel& ext
+   );
 
-      virtual
-      ~L3GD20H();
-
-public:
-      bool
-      probe();
-
-      uint8_t
-      readRegister(
-         uint8_t reg
-      );
-
-      void
-      writeRegister(
-         uint8_t reg,
-         uint8_t value
-      );
-
+   virtual
+   ~L3GD20H();
 
 public:
-      Core::HW::SPIDevice&  _spi;
-      Core::HW::EXTChannel& _ext;
-   };
+   bool
+   probe();
+
+   uint8_t
+   readRegister(
+      uint8_t reg
+   );
+
+   void
+   writeRegister(
+      uint8_t reg,
+      uint8_t value
+   );
 
 
-   class L3GD20H_Gyro:
-      public Core::MW::CoreSensor<Configuration::L3GD20H_GYRO_DATATYPE>
-   {
 public:
-      L3GD20H_Gyro(
-         L3GD20H& device
-      );
+   core::hw::SPIDevice&  _spi;
+   core::hw::EXTChannel& _ext;
+};
 
-      virtual
-      ~L3GD20H_Gyro();
+
+class L3GD20H_Gyro:
+   public core::mw::CoreSensor<ModuleConfiguration::L3GD20H_GYRO_DATATYPE>
+{
+public:
+   L3GD20H_Gyro(
+      L3GD20H& device
+   );
+
+   virtual
+   ~L3GD20H_Gyro();
 
 public:
-      bool
-      init();
+   bool
+   init();
 
-      bool
-      start();
+   bool
+   configure();
 
-      bool
-      stop();
+   bool
+   start();
 
-      bool
-      waitUntilReady();
+   bool
+   stop();
 
-      bool
-      update();
+   bool
+   waitUntilReady();
 
-      void
-      get(
-         DataType& data
-      );
+   bool
+   update();
+
+   void
+   get(
+      DataType& data
+   );
 
 
 protected:
-      Core::MW::Thread* _runner;
-      Core::MW::Time    _timestamp;
-      Configuration::L3GD20H_GYRO_DATATYPE _data;
+   core::os::Thread* _runner;
+   core::os::Time    _timestamp;
+   ModuleConfiguration::L3GD20H_GYRO_DATATYPE _data;
 
 private:
-      L3GD20H& _device;
-   };
+   L3GD20H& _device;
+};
 }
