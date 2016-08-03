@@ -90,7 +90,7 @@ L3GD20H::probe()
 bool
 L3GD20H_Gyro::init()
 {
-   _device._ext.setCallback([this]() {
+   _device._ext.setCallback([this](uint32_t channel) {
          chSysLockFromISR();
 
          if (_runner != nullptr) {
