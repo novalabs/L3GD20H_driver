@@ -10,7 +10,7 @@
 
 #include <core/hw/SPI.hpp>
 #include <core/hw/EXT.hpp>
-#include <core/mw/CoreSensor.hpp>
+#include <core/utils/BasicSensor.hpp>
 #include <core/os/Thread.hpp>
 
 namespace sensors {
@@ -48,7 +48,7 @@ public:
 
 
 class L3GD20H_Gyro:
-   public core::mw::CoreSensor<ModuleConfiguration::L3GD20H_GYRO_DATATYPE>
+   public core::utils::BasicSensor<ModuleConfiguration::L3GD20H_GYRO_DATATYPE>
 {
 public:
    L3GD20H_Gyro(
