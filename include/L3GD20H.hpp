@@ -17,78 +17,78 @@ namespace sensors {
 class L3GD20H
 {
 public:
-   L3GD20H(
-      core::hw::SPIDevice&  spi,
-      core::hw::EXTChannel& ext
-   );
+    L3GD20H(
+        core::hw::SPIDevice&  spi,
+        core::hw::EXTChannel& ext
+    );
 
-   virtual
-   ~L3GD20H();
-
-public:
-   bool
-   probe();
-
-   uint8_t
-   readRegister(
-      uint8_t reg
-   );
-
-   void
-   writeRegister(
-      uint8_t reg,
-      uint8_t value
-   );
-
+    virtual
+    ~L3GD20H();
 
 public:
-   core::hw::SPIDevice&  _spi;
-   core::hw::EXTChannel& _ext;
+    bool
+    probe();
+
+    uint8_t
+    readRegister(
+        uint8_t reg
+    );
+
+    void
+    writeRegister(
+        uint8_t reg,
+        uint8_t value
+    );
+
+
+public:
+    core::hw::SPIDevice&  _spi;
+    core::hw::EXTChannel& _ext;
 };
 
 
 class L3GD20H_Gyro:
-   public core::utils::BasicSensor<ModuleConfiguration::L3GD20H_GYRO_DATATYPE>
+    public core::utils::BasicSensor<ModuleConfiguration::L3GD20H_GYRO_DATATYPE>
 {
 public:
-   L3GD20H_Gyro(
-      L3GD20H& device
-   );
+    L3GD20H_Gyro(
+        L3GD20H& device
+    );
 
-   virtual
-   ~L3GD20H_Gyro();
+    virtual
+    ~L3GD20H_Gyro();
 
 public:
-   bool
-   init();
+    bool
+    init();
 
-   bool
-   configure();
+    bool
+    configure();
 
-   bool
-   start();
+    bool
+    start();
 
-   bool
-   stop();
+    bool
+    stop();
 
-   bool
-   waitUntilReady();
+    bool
+    waitUntilReady();
 
-   bool
-   update();
+    bool
+    update();
 
-   void
-   get(
-      DataType& data
-   );
+    void
+    get(
+        DataType& data
+    );
 
 
 protected:
-   core::os::Thread* _runner;
-   core::os::Time    _timestamp;
-   ModuleConfiguration::L3GD20H_GYRO_DATATYPE _data;
+    core::os::Thread* _runner;
+    core::os::Time    _timestamp;
+    ModuleConfiguration::L3GD20H_GYRO_DATATYPE _data;
 
 private:
-   L3GD20H& _device;
+    L3GD20H& _device;
 };
 }
