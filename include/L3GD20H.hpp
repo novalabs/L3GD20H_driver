@@ -82,6 +82,8 @@ public:
         DataType& data
     );
 
+    void
+    reset() {};
 
 protected:
     core::os::Thread* _runner;
